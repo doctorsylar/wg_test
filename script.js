@@ -4,6 +4,11 @@ let ships = [];
 
 document.addEventListener("DOMContentLoaded", function(event) {
     getShips();
+
+    document.querySelector('.app-main__search-input')
+        .addEventListener('input', event => {
+            search(event.target.value);
+    });
 });
 
 
@@ -84,9 +89,10 @@ function addShip(ship) {
     results.insertAdjacentHTML('beforeend', node);
     let sum = document.querySelector('.app-results__sum');
     sum.innerHTML = parseInt(sum.innerHTML) + parseInt(ship.dataset.level);
-    document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"]').addEventListener('click',event => {
-        let target = event.target.closest('.app-results__item');
-        removeShip(target);
+    document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"] .app-results__remove')
+        .addEventListener('click',event => {
+            let target = event.target.closest('.app-results__item');
+            removeShip(target);
     });
 }
 function removeShip(ship) {
@@ -112,4 +118,24 @@ function countResults (level) {
         return false;
     }
     return true;
+}
+function search(input) {
+    input = input.toLowerCase();
+    let ships = document.querySelectorAll('.app-main__item');
+    if (input.length > 0) {
+        for (let i = 0; i < ships.length; i++) {
+            if (ships[i].dataset.title.toLowerCase().includes(input)) {
+                ships[i].style.display = 'block';
+            }
+            else {
+                ships[i].style.display = 'none';
+            }
+        }
+    }
+    else {
+        for (let i = 0; i < ships.length; i++) {
+            ships[i].style.display = 'block';
+        }
+    }
+
 }
