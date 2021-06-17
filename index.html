@@ -16,17 +16,39 @@
                 <input type="text" placeholder="Найти корабль" class="app-main__search-input">
             </div>
             <div class="app-main__filters-container">
-                <div class="app-main__filter"></div>
+                <div class="app-main__filter filter-nation">
+                    <div class="app-main__filter-current">
+                        Нация
+                    </div>
+                    <ul class="app-main__filter-list"></ul>
+                </div>
+                <div class="app-main__filter filter-type">
+                    <div class="app-main__filter-current">
+                        Класс
+                    </div>
+                    <ul class="app-main__filter-list"></ul>
+                </div>
+                <div class="app-main__filter filter-level">
+                    <div class="app-main__filter-current">
+                        Уровень
+                    </div>
+                    <ul class="app-main__filter-list"></ul>
+                </div>
             </div>
         </header>
         <div class="app-main-body">
             <div class="app-main__list"></div>
         </div>
     </div>
-    <div class="app-results">
-        <p class="app-results__heading">Выбранные корабли:</p>
-        <div class="app-results-list">
+    <div class="app-results-container">
+        <div class="app-results">
+            <p class="app-results__heading">Выбранные корабли:</p>
+            <div class="app-results-list">
 
+            </div>
+            <div class="app-results__bottom">
+                <p>Сумма уровней: <span class="app-results__sum">0</span></p>
+            </div>
         </div>
     </div>
 </main>

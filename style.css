@@ -26,6 +26,7 @@ body {
     color: #222222;
 }
 .app {
+    padding-top: 30px;
     display: flex;
     width: 1200px;
     max-width: 100%;
@@ -33,28 +34,136 @@ body {
 }
 .app-main {
     width: 75%;
+    padding-right: 16px;
+    border-right: 1px solid #adadad;
+}
+.app-main-header {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #adadad;
+}
+.app-main__search-container input {
+    width: 100%;
+}
+.app-main__search-container input, .app-main__filter .app-main__filter-current {
+    padding: 6px 12px;
+    background-color: #adadad;
+    color: #222222;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+.app-main__filters-container {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.app-main__filter {
+    width: 32%;
+    cursor: pointer;
+}
+.app-main__filter .app-main__filter-current {
+    position: relative;
+}
+.app-main__filter .app-main__filter-current:after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 4px);
+    right: 8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    border-color: #222222 transparent transparent transparent;
 }
 .app-main__list {
+    padding-top: 16px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.app-main__item {
-    padding: 12px;
-    margin-bottom: 16px;
+.app-main__item, .app-results__item {
+    padding: 6px 12px;
+    margin-bottom: 12px;
     background-color: #adadad;
-    width: 30%;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: .3s;
 }
-.app-main__item .app-main__item-info span {
+.app-main__item {
+    width: 32%;
+}
+.app-main__item * {
+    transition: .3s;
+}
+.app-main__item .app-main__ok {
+    opacity: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 10px;
+    height: 4px;
+    transform-origin: center center;
+    transform: rotate(-45deg);
+    border-bottom: 1px solid #222222;
+    border-left: 1px solid #222222;
+}
+.app-results .app-results__remove {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+}
+.app-results .app-results__remove:before, .app-results .app-results__remove:after {
+    position: absolute;
+    content: '';
+    width: 13px;
+    height: 1px;
+    background-color: #222222;
+    left: 0;
+}
+.app-results .app-results__remove:before {
+    transform-origin: top left;
+    top: 0;
+    transform: rotate(43deg);
+}
+.app-results .app-results__remove:after {
+    transform-origin: bottom left;
+    bottom: 0;
+    transform: rotate(-43deg);
+}
+.app-main__item.active {
+    background-color: rgba(173, 173, 173, 0.6);
+}
+.app-main__item.active .app-main__ok {
+    opacity: 1;
+}
+.app-main__item.active *:not(.app-main__ok) {
+    opacity: .6;
+}
+.app-main__item .app-main__item-info, .app-results__item .app-results__item-info {
+    margin-bottom: 4px;
+}
+.app-main__item .app-main__item-info span, .app-results__item .app-results__item-info span {
     font-size: .8rem;
     color: #505050;
 }
-.app-main__item .app-main__item-title span {
+.app-main__item .app-main__item-title span, .app-results__item .app-main__item-title span {
     font-size: 1rem;
     color: #222222;
 }
 
 
-.app-results {
+.app-results-container {
     width: 25%;
+    padding-left: 16px;
+}
+.app-results {
+    position: sticky;
+    top: 0;
+}
+.app-results-list {
+    padding-top: 12px;
 }
