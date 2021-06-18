@@ -165,6 +165,7 @@ function applyFilter () {
         ships[i].classList.add('filtered');
         ships[i].style.display = 'block';
     }
+    search(document.querySelector('.app-main__search-input').value);
 }
 function clickShip (ship) {
     if (!ship.className.includes('active')) {
