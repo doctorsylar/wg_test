@@ -268,6 +268,8 @@ function animateShipAdding(ship, resultShip) {
     clone.style.top = resultShip.getBoundingClientRect().top + 'px';
     setTimeout(function () {
         resultShip.style.visibility = 'visible';
+    }, 550);
+    setTimeout(function () {
         clone.remove();
     }, 600);
 }
