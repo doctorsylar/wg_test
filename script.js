@@ -206,6 +206,7 @@ function addShip(ship) {
             let target = event.target.closest('.app-results__item');
             removeShip(target);
     });
+    animateShipAdding(ship, document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"]'));
 }
 function removeShip(ship) {
     let results = document.querySelector('.app-results-list');
@@ -252,4 +253,21 @@ function search(input) {
             ships[i].style.display = 'block';
         }
     }
+}
+function animateShipAdding(ship, resultShip) {
+    let clone = resultShip.cloneNode(true);
+    clone.style.width = resultShip.offsetWidth + 'px';
+    clone.style.height = resultShip.offsetHeight + 'px';
+    clone.style.position = 'fixed';
+    clone.style.visibility = 'visible';
+    clone.style.transition = '.6s';
+    clone.style.left = ship.getBoundingClientRect().left + 'px';
+    clone.style.top = ship.getBoundingClientRect().top + 'px';
+    document.querySelector('body').append(clone);
+    clone.style.left = resultShip.getBoundingClientRect().left + 'px';
+    clone.style.top = resultShip.getBoundingClientRect().top + 'px';
+    setTimeout(function () {
+        resultShip.style.visibility = 'visible';
+        clone.remove();
+    }, 600);
 }

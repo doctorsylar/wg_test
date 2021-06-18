@@ -120,6 +120,12 @@ body {
     user-select: none;
     transition: .3s;
 }
+.app-results__item {
+    visibility: hidden;
+}
+.app-results__item.visible {
+    visibility: visible;
+}
 .app-main__item {
     width: 32%;
 }
