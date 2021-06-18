@@ -1,6 +1,4 @@
 'use strict';
-let ships = [];
-
 
 document.addEventListener("DOMContentLoaded", function(event) {
     getShips();
@@ -9,11 +7,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .addEventListener('input', event => {
             applyFilter();
     });
+
+    document.querySelector('.app-results__copy')
+        .addEventListener('click', event => {
+            shareResults();
+    });
 });
-
-
-
-
 function getShips () {
     fetch('./ships.json')
         .then((response) => {
@@ -67,6 +66,7 @@ function drawShips (ships) {
             clickShip(target);
         });
     })
+    checkShared();
 }
 function drawFilters(nations, types, levels) {
     let natCont = document.querySelector('.filter-nation .app-main__filter-list');
@@ -177,7 +177,7 @@ function clickShip (ship) {
         removeShip(ship);
     }
 }
-function addShip(ship) {
+function addShip(ship, animate) {
     let results = document.querySelector('.app-results-list');
     ship.classList.add('active');
     let node =
@@ -206,7 +206,13 @@ function addShip(ship) {
             let target = event.target.closest('.app-results__item');
             removeShip(target);
     });
-    animateShipAdding(ship, document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"]'));
+    if (animate !== false) {
+        animateShipAdding(ship, document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"]'));
+    }
+    else {
+        document.querySelector('.app-results__item[data-id="' + ship.dataset.id + '"]')
+            .style.visibility = 'visible';
+    }
 }
 function removeShip(ship) {
     let results = document.querySelector('.app-results-list');
@@ -269,4 +275,71 @@ function animateShipAdding(ship, resultShip) {
     setTimeout(function () {
         clone.remove();
     }, 600);
+}
+function shareResults() {
+    let sitelink = window.location.origin + window.location.pathname;
+    let resShips = document.querySelectorAll('.app-results__item');
+    let resArray = [];
+    if (resShips.length > 0) {
+        for (let i = 0; i < resShips.length; i++) {
+            let ship = {
+                nation : resShips[i].dataset.nation,
+                type : resShips[i].dataset.type,
+                level : resShips[i].dataset.level,
+                title : resShips[i].dataset.title,
+            }
+            resArray.push(ship);
+        }
+        let parts = resArray.map((obj) => {
+            return(
+                encodeURIComponent('nation') + '=' +
+                encodeURIComponent(obj.nation) + '&' +
+                encodeURIComponent('type') + '=' +
+                encodeURIComponent(obj.type) + '&' +
+                encodeURIComponent('level') + '=' +
+                encodeURIComponent(obj.level) + '&' +
+                encodeURIComponent('title') + '=' +
+                encodeURIComponent(obj.title)
+            );
+        });
+        let url = parts.join('&');
+
+        let linkInput = document.querySelector('.app-results__link');
+        linkInput.value = sitelink + '?' + url;
+        linkInput.select();
+        document.execCommand("copy");
+        document.querySelector('.app-results__copy-text').classList.add('visible');
+    }
+}
+function checkShared() {
+    let params = new URLSearchParams(window.location.search.slice(1));
+    let ships = [];
+    ships.push([]);
+    params.forEach(function(value, key) {
+        console.log(key, value);
+        if (key in ships[ships.length - 1]) {
+            ships.push([]);
+        }
+        ships[ships.length - 1][key] = value;
+    });
+    if (ships.length > 0) {
+        let drawnShips = document.querySelectorAll('.app-main__item');
+        for (let i = 0; i < drawnShips.length; i++) {
+            for (let j = 0; j < ships.length; j++) {
+                if (drawnShips[i].dataset.type !== ships[j].type) {
+                    continue;
+                }
+                else if (drawnShips[i].dataset.title !== ships[j].title) {
+                    continue;
+                }
+                else if (drawnShips[i].dataset.nation !== ships[j].nation) {
+                    continue;
+                }
+                else if (drawnShips[i].dataset.level !== ships[j].level) {
+                    continue;
+                }
+                addShip(drawnShips[i], false);
+            }
+        }
+    }
 }

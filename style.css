@@ -202,3 +202,13 @@ body {
 .app-results-list {
     padding-top: 12px;
 }
+.app-results__copy {
+    margin: 6px 0;
+}
+.app-results__copy-text {
+    opacity: 0;
+    transition: .3s;
+}
+.app-results__copy-text.visible {
+    opacity: 1;
+}
