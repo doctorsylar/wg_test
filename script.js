@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.querySelector('.app-main__search-input')
         .addEventListener('input', event => {
-            search(event.target.value);
+            applyFilter();
     });
 });
 
@@ -235,9 +235,6 @@ function countResults (level) {
 function search(input) {
     input = input.toLowerCase();
     let ships = document.querySelectorAll('.app-main__item.filtered');
-    if (ships.length === 0) {
-        ships = document.querySelectorAll('.app-main__item');
-    }
     if (input.length > 0) {
         for (let i = 0; i < ships.length; i++) {
             if (ships[i].dataset.title.toLowerCase().includes(input)) {
