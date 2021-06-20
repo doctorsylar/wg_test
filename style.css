@@ -120,6 +120,9 @@ body {
     user-select: none;
     transition: .3s;
 }
+.app-main__item.hidden {
+    display: none;
+}
 .app-results__item {
     visibility: hidden;
 }

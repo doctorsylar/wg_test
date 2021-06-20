@@ -143,27 +143,27 @@ function applyFilter () {
     for (let i = 0; i < ships.length; i++) {
         if (natValue !== 'null') {
             if (ships[i].dataset.nation !== natValue) {
-                ships[i].style.display = 'none';
+                ships[i].classList.add('hidden');
                 ships[i].classList.remove('filtered');
                 continue;
             }
         }
         if (typeValue !== 'null') {
             if (ships[i].dataset.type !== typeValue) {
-                ships[i].style.display = 'none';
+                ships[i].classList.add('hidden');
                 ships[i].classList.remove('filtered');
                 continue;
             }
         }
         if (levelValue !== 'null') {
             if (ships[i].dataset.level !== levelValue) {
-                ships[i].style.display = 'none';
+                ships[i].classList.add('hidden');
                 ships[i].classList.remove('filtered');
                 continue;
             }
         }
         ships[i].classList.add('filtered');
-        ships[i].style.display = 'block';
+        ships[i].classList.remove('hidden');
     }
     search(document.querySelector('.app-main__search-input').value);
 }
@@ -244,16 +244,16 @@ function search(input) {
     if (input.length > 0) {
         for (let i = 0; i < ships.length; i++) {
             if (ships[i].dataset.title.toLowerCase().includes(input)) {
-                ships[i].style.display = 'block';
+                ships[i].classList.remove('hidden');
             }
             else {
-                ships[i].style.display = 'none';
+                ships[i].classList.add('hidden');
             }
         }
     }
     else {
         for (let i = 0; i < ships.length; i++) {
-            ships[i].style.display = 'block';
+            ships[i].classList.remove('hidden');
         }
     }
 }
@@ -316,7 +316,6 @@ function checkShared() {
     let ships = [];
     ships.push([]);
     params.forEach(function(value, key) {
-        console.log(key, value);
         if (key in ships[ships.length - 1]) {
             ships.push([]);
         }
