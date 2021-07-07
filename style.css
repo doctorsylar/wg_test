@@ -225,10 +225,14 @@ body {
         box-sizing: border-box;
     }
     .app-main {
-        width: 50%;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        box-sizing: border-box;
     }
     .app-results-container {
-        width: 50%;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        box-sizing: border-box;
     }
     .app-main__filters-container {
         flex-wrap: wrap;
