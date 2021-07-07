@@ -26,11 +26,12 @@ body {
     color: #222222;
 }
 .app {
-    padding-top: 30px;
     display: flex;
     width: 1200px;
     max-width: 100%;
     margin: 0 auto;
+    padding: 30px 16px;
+    box-sizing: border-box;
 }
 .app-main {
     width: 75%;
@@ -46,11 +47,11 @@ body {
 }
 .app-main__search-container input, .app-main__filter .app-main__filter-current {
     padding: 6px 12px;
-    background-color: #adadad;
     color: #222222;
     border: none;
     outline: none;
     box-sizing: border-box;
+    background-color: #62aeff;
 }
 .app-main__filters-container {
     margin-top: 16px;
@@ -87,7 +88,7 @@ body {
     z-index: 1;
     top: 0;
     list-style: none;
-    background-color: #adadad;
+    background-color: #62aeff;
 }
 .app-main__filter.active .app-main__filter-list {
     top: 100%;
@@ -99,10 +100,10 @@ body {
 .app-main__filter .app-main__filter-list li {
     padding: 4px 12px;
     transition: .3s;
-    background-color: #adadad;
+    background-color: #62aeff;
 }
 .app-main__filter .app-main__filter-list li:hover {
-    background-color: #878787;
+    background-color: #3270b1;
 }
 .app-main__list {
     padding-top: 16px;
@@ -113,7 +114,7 @@ body {
 .app-main__item, .app-results__item {
     padding: 6px 12px;
     margin-bottom: 12px;
-    background-color: #adadad;
+    background-color: #62aeff;
     box-sizing: border-box;
     position: relative;
     cursor: pointer;
@@ -122,6 +123,9 @@ body {
 }
 .app-main__item.hidden {
     display: none;
+}
+.app-main__item:not(.active):hover {
+    box-shadow: 1px 1px 8px 0px #62aeff;
 }
 .app-results__item {
     visibility: hidden;
@@ -214,4 +218,34 @@ body {
 }
 .app-results__copy-text.visible {
     opacity: 1;
+}
+@media (max-width: 576px) {
+    .app {
+        padding: 30px 16px;
+        box-sizing: border-box;
+    }
+    .app-main {
+        width: 50%;
+    }
+    .app-results-container {
+        width: 50%;
+    }
+    .app-main__filters-container {
+        flex-wrap: wrap;
+    }
+    .app-main__filter {
+        margin-bottom: 16px;
+        flex-basis: 100%;
+    }
+    .app-main__filter:last-child {
+        margin-bottom: 0;
+    }
+    .app-main__item {
+        flex-basis: 100%;
+    }
+    .app-main__item .app-main__ok,
+    .app-results .app-results__remove {
+        top: 5px;
+        right: 5px;
+    }
 }
